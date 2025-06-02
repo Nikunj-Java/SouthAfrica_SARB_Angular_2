@@ -16,7 +16,7 @@
     </table>
 </div> -->
 
-<div *ngIf="loading" class="spinner">
+<!--<div *ngIf="loading" class="spinner">
     <mat-spinner></mat-spinner>
 </div>
 
@@ -29,4 +29,47 @@
             <p><strong>Body:</strong>{{p.body}}</p>
         </mat-card-content>
     </mat-card>
+</div>-->
+
+<mat-form-field appearance="outline" style="width: 100%; margin-bottom: 10px;" *ngIf="!loading">
+  <mat-label>Filter Posts</mat-label>
+  <input matInput (keyup)="applyFilter($event)" placeholder="Search by title or body">
+</mat-form-field>
+
+<div *ngIf="loading" class="spinner">
+  <mat-spinner></mat-spinner>
+</div>
+
+<div *ngIf="!loading">
+  <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+
+    <!-- UserId Column -->
+    <ng-container matColumnDef="userId">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>User ID</th>
+      <td mat-cell *matCellDef="let posts">{{ posts.userId }}</td>
+    </ng-container>
+
+    <!-- Id Column -->
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
+      <td mat-cell *matCellDef="let post">{{ post.id }}</td>
+    </ng-container>
+
+    <!-- Title Column -->
+    <ng-container matColumnDef="title">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Title</th>
+      <td mat-cell *matCellDef="let post">{{ post.title }}</td>
+    </ng-container>
+
+    <!-- Body Column -->
+    <ng-container matColumnDef="body">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Body</th>
+      <td mat-cell *matCellDef="let post">{{ post.body }}</td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+  <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
 </div>

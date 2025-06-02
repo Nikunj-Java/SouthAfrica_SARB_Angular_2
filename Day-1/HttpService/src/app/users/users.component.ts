@@ -1,6 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { PostClass } from '../PostClass';
 import { DataService } from '../data.service';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
 
 @Component({
   selector: 'app-users',
@@ -9,8 +12,17 @@ import { DataService } from '../data.service';
 })
 export class UsersComponent implements OnInit {
 
+
+  displayedColumns: string[] = ['userId', 'id', 'title', 'body'];
+  dataSource = new MatTableDataSource<any>();
+  loading = true;
+
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
+
+
   posts:PostClass[];
-  loading=true;
+   
 
   //dependency injection
   constructor(private service: DataService){}
@@ -22,5 +34,9 @@ export class UsersComponent implements OnInit {
         this.loading=false;
       }
     );
+  }
+  applyFilter(event: Event): void {
+    const filterValue = (event.target as HTMLInputElement).value.trim().toLowerCase();
+    this.dataSource.filter = filterValue;
   }
 }
