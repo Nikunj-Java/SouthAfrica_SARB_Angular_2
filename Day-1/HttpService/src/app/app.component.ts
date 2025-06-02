@@ -7,4 +7,15 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'HttpService';
+
+  userName='Alice';
+  showUser=true;
+
+  toggleUser(){
+    this.showUser= !this.showUser;
+  }
+
+  changeName(){
+    this.userName= this.userName ==='Alice'?'Bob' : 'Alice';
+  }
 }

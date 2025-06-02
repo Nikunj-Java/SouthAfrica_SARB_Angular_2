@@ -7,7 +7,7 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link active" routerLink="home" aria-current="page">Home</a>
+          <a class="nav-link active" routerLink="card" aria-current="page">User-Cards</a>
         </li>
 
          <li class="nav-item">
@@ -24,5 +24,17 @@
     </div>
   </div>
 </nav>
+
+
+
+<div class="container">
+  <button class="btn btn-primary" (click)="toggleUser()"> Toggle User Card</button>
+<button class="btn btn-info" (click)="changeName()"> ChangeName</button>
+
+</div>
+
+<app-user-card *ngIf="showUser" [name]="userName"></app-user-card>
+
+
 
 <router-outlet></router-outlet>
