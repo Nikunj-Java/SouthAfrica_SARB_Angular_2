@@ -1,0 +1,13 @@
+.spinner{
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
+
+}
+
+.user-card{
+    margin: 1 rem;
+    background-color: aliceblue;
+    padding: 10px;
+    border: solid 5px royalblue;
+}

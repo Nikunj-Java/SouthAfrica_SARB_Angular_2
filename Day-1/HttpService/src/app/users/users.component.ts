@@ -10,11 +10,17 @@ import { DataService } from '../data.service';
 export class UsersComponent implements OnInit {
 
   posts:PostClass[];
+  loading=true;
 
   //dependency injection
   constructor(private service: DataService){}
 
   ngOnInit(): void {
-    this.service.getAllPosts().subscribe(result=> this.posts=result);
+    this.service.getAllPosts().subscribe(
+      (data)=>{
+        this.posts=data;
+        this.loading=false;
+      }
+    );
   }
 }

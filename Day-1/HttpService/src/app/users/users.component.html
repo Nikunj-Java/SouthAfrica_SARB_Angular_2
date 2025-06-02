@@ -1,4 +1,4 @@
-<div  class="container">
+<!-- <div  class="container">
     <table class="table table-bordered table-striped">
         <thead>
             <tr>
@@ -14,4 +14,19 @@
             </tr>
         </tbody>
     </table>
+</div> -->
+
+<div *ngIf="loading" class="spinner">
+    <mat-spinner></mat-spinner>
+</div>
+
+<div *ngIf="!loading">
+    <mat-card *ngFor="let p of posts" class="user-card">
+        <mat-card-title>{{p.title}}</mat-card-title>
+        <mat-card-content>
+            <p><strong>UserId:</strong>{{p.userId}}</p>
+            <p><strong>Id:</strong>{{p.id}}</p>
+            <p><strong>Body:</strong>{{p.body}}</p>
+        </mat-card-content>
+    </mat-card>
 </div>
