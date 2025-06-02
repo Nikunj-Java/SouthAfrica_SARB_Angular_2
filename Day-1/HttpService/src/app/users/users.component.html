@@ -1,20 +1,55 @@
-<!-- <div  class="container">
-    <table class="table table-bordered table-striped">
-        <thead>
-            <tr>
-                <th>Id</th> <th>UserId</th><th>Title</th><th>Body</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let p of posts">
-                <td>{{p.id}}</td>
-                <td>{{p.userId}}</td>
-                <td>{{p.title}}</td>
-                <td>{{p.body}}</td>
-            </tr>
-        </tbody>
-    </table>
-</div> -->
+<div class="container mt-4">
+  <h3 class="text-center">User List</h3>
+
+  <div *ngIf="loading" class="text-center">
+    <div class="spinner-border text-primary" role="status"></div>
+    <p>Loading...</p>
+  </div>
+
+  <div class="row" *ngIf="!loading">
+    <div class="col-md-4 mb-3" *ngFor="let user of users">
+      <div class="card h-100 shadow-sm" (click)="openUserDetails(user)" style="cursor: pointer;">
+        <div class="card-body">
+          <h5 class="card-title">{{ user.name }}</h5>
+          <p class="card-text">{{ user.email }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="userModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-xl modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">{{ selectedUser?.name }}'s Posts</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <div *ngFor="let post of userPosts" class="mb-4">
+          <div class="row g-3">
+            <div class="col-md-4">
+              <img [src]="'https://picsum.photos/id/' + post.id + '/400/250'" class="img-fluid rounded">
+            </div>
+            <div class="col-md-8">
+              <h5>{{ post.title }}</h5>
+              <p>{{ post.body }}</p>
+              <strong>Comments:</strong>
+              <ul>
+                <li *ngFor="let comment of postComments[post.id]">
+                  <strong>{{ comment.email }}</strong>: {{ comment.body }}
+                </li>
+              </ul>
+            </div>
+          </div>
+          <hr>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 
 <!--<div *ngIf="loading" class="spinner">
     <mat-spinner></mat-spinner>
@@ -31,45 +66,4 @@
     </mat-card>
 </div>-->
 
-<mat-form-field appearance="outline" style="width: 100%; margin-bottom: 10px;" *ngIf="!loading">
-  <mat-label>Filter Posts</mat-label>
-  <input matInput (keyup)="applyFilter($event)" placeholder="Search by title or body">
-</mat-form-field>
-
-<div *ngIf="loading" class="spinner">
-  <mat-spinner></mat-spinner>
-</div>
-
-<div *ngIf="!loading">
-  <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
-
-    <!-- UserId Column -->
-    <ng-container matColumnDef="userId">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>User ID</th>
-      <td mat-cell *matCellDef="let posts">{{ posts.userId }}</td>
-    </ng-container>
-
-    <!-- Id Column -->
-    <ng-container matColumnDef="id">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
-      <td mat-cell *matCellDef="let post">{{ post.id }}</td>
-    </ng-container>
-
-    <!-- Title Column -->
-    <ng-container matColumnDef="title">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Title</th>
-      <td mat-cell *matCellDef="let post">{{ post.title }}</td>
-    </ng-container>
-
-    <!-- Body Column -->
-    <ng-container matColumnDef="body">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Body</th>
-      <td mat-cell *matCellDef="let post">{{ post.body }}</td>
-    </ng-container>
-
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-  </table>
-
-  <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
-</div>
+ 

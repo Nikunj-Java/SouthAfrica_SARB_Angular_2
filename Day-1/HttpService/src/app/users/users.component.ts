@@ -1,9 +1,10 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { PostClass } from '../PostClass';
-import { DataService } from '../data.service';
-import { MatTableDataSource } from '@angular/material/table';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
+import { Component, OnInit } from '@angular/core';
+import { UserService } from '../user.service';
+import { PostService } from '../posts.service';
+import { CommentService } from '../comments.service';
+import { User, Post, Comment } from '../model';
+
+declare var bootstrap: any;
 
 @Component({
   selector: 'app-users',
@@ -11,32 +12,52 @@ import { MatSort } from '@angular/material/sort';
   styleUrls: ['./users.component.css']
 })
 export class UsersComponent implements OnInit {
-
-
-  displayedColumns: string[] = ['userId', 'id', 'title', 'body'];
-  dataSource = new MatTableDataSource<any>();
+  users: User[] = [];
+  posts: Post[] = [];
+  comments: Comment[] = [];
   loading = true;
 
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
-  @ViewChild(MatSort) sort!: MatSort;
+  selectedUser: User | null = null;
+  userPosts: Post[] = [];
+  postComments: { [postId: number]: Comment[] } = {};
 
-
-  posts:PostClass[];
-   
-
-  //dependency injection
-  constructor(private service: DataService){}
+  constructor(
+    private userService: UserService,
+    private postService: PostService,
+    private commentService: CommentService
+  ) {}
 
   ngOnInit(): void {
-    this.service.getAllPosts().subscribe(
-      (data)=>{
-        this.posts=data;
-        this.loading=false;
-      }
-    );
+    Promise.all([
+      this.userService.getUsers().toPromise(),
+      this.postService.getPosts().toPromise(),
+      this.commentService.getComments().toPromise()
+    ])
+      .then(([users, posts, comments]) => {
+        this.users = users!;
+        this.posts = posts!;
+        this.comments = comments!;
+        this.loading = false;
+      })
+      .catch(err => {
+        console.error('API Error:', err);
+        this.loading = false;
+      });
   }
-  applyFilter(event: Event): void {
-    const filterValue = (event.target as HTMLInputElement).value.trim().toLowerCase();
-    this.dataSource.filter = filterValue;
+
+  openUserDetails(user: User): void {
+    this.selectedUser = user;
+    this.userPosts = this.posts.filter(p => p.userId === user.id);
+    this.postComments = {};
+
+    this.userPosts.forEach(post => {
+      this.postComments[post.id] = this.comments.filter(c => c.postId === post.id);
+    });
+
+    const modalEl = document.getElementById('userModal');
+    if (modalEl) {
+      const modal = new bootstrap.Modal(modalEl);
+      modal.show();
+    }
   }
 }

@@ -1,4 +1,4 @@
-<!-- <nav class="navbar navbar-expand-lg bg-body-tertiary">
+ <nav class="navbar navbar-expand-lg bg-body-tertiary">
   <div class="container-fluid">
     <a class="navbar-brand" href="#">Http Service App</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -7,12 +7,14 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link active" routerLink="card" aria-current="page">User-Cards</a>
+          <a class="nav-link active" routerLink="dashboard" aria-current="page">Dashboard</a>
         </li>
 
          <li class="nav-item">
           <a class="nav-link active" routerLink="http" aria-current="page">users</a>
         </li>
+
+        
       
         
          
@@ -31,12 +33,11 @@
   <button class="btn btn-primary" (click)="toggleUser()"> Toggle User Card</button>
 <button class="btn btn-info" (click)="changeName()"> ChangeName</button>
 
-</div>-->
+</div> 
 
-<!--<app-user-card *ngIf="showUser" [name]="userName"></app-user-card>-->
+ <!--<app-user-card *ngIf="showUser" [name]="userName"></app-user-card>-->
 
 
 
-<!-- <router-outlet></router-outlet>  -->
-
-<app-users></app-users>
+  <router-outlet></router-outlet>  
+ 
