@@ -13,6 +13,7 @@ import { ChildAComponent } from './child-a/child-a.component';
 import { ChildBComponent } from './child-b/child-b.component';
 
 const routes: Routes = [
+{ path: '', redirectTo: 'login', pathMatch: 'full' },
   {path:"login",component:LoginComponent},
   {path:"dashboard",
     component:DashboardComponent,
@@ -21,22 +22,25 @@ const routes: Routes = [
   {
     path:"home",
     component:HomeComponent,
-    canActivateChild:[authGuard,authChildGuard],
+    canActivate:[authGuard],
+    canActivateChild:[authChildGuard],
     children:[
       {path:"child-a",component:ChildAComponent},
       {path:"child-b",component:ChildBComponent}
     ]
 
   },
-  {path:"users",component:UsersComponent},
-  {path:"accounts",component:AccountsComponent},
+  {path:"admin/users",component:UsersComponent,canActivate: [roleGuard],
+    data: { expectedRole: 'admin' }},
+  {path:"admin/accounts",component:AccountsComponent,canActivate: [roleGuard],
+    data: { expectedRole: 'admin' }},
   {
     path: 'admin',
     component: AdminComponent,
     canActivate: [roleGuard],
     data: { expectedRole: 'admin' }
   },
-  { path: 'not-authorized', component: NotAuthorizedComponent }
+  { path: 'not-authorized', component: NotAuthorizedComponent },
 ];
 
 @NgModule({

@@ -10,14 +10,16 @@ export class AuthService {
 
   loginAsUser(){
     this.currentUser={username:'jhon',role:'user'};
+    this.login();
   }
   loginAsAdmin(){
     this.currentUser={username:'admin',role:'admin'};
+    this.login();
   }
   
   logout(){
     this.currentUser=null;
-     this.loggedIn=false;
+    this.loggedIn=false;
   }
 
   isLoggedin():boolean{
@@ -27,9 +29,12 @@ export class AuthService {
     return this.currentUser?.role || null;
   }
 
-
   login(){
     this.loggedIn=true
+     
+  }
+  isLoggedOut():boolean{
+    return this.currentUser ==null && this.loggedIn;
   }
   
 }
