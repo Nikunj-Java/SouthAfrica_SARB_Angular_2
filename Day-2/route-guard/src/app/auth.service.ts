@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
 })
 export class AuthService {
 
- 
+  private loggedIn=false;
   private currentUser:{username: string; role: string} | null=null;
 
   loginAsUser(){
@@ -17,14 +17,19 @@ export class AuthService {
   
   logout(){
     this.currentUser=null;
+     this.loggedIn=false;
   }
 
   isLoggedin():boolean{
-    return this.currentUser !==null;
+    return this.currentUser !==null && this.loggedIn;
   }
   getRole():string |null {
     return this.currentUser?.role || null;
   }
 
-  constructor() { }
+
+  login(){
+    this.loggedIn=true
+  }
+  
 }

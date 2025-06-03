@@ -8,20 +8,20 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
+  constructor(private authService: AuthService, private router: Router) {}
 
-  constructor(private auth:AuthService,private router:Router){}
-
-  // login(){
-  //   this.auth.login();
-  //   this.router.navigate(['/dashboard']);
-  // }
-
-  loginAsUser(){
-    this.auth.loginAsUser();
+  loginAsUser() {
+    this.authService.loginAsUser();
     this.router.navigate(['/']);
   }
-  loginAsAdmin(){
-    this.auth.loginAsAdmin();
+
+  loginAsAdmin() {
+    this.authService.loginAsAdmin();
     this.router.navigate(['/admin']);
+  }
+
+  loginChild(){
+    this.authService.login();
+    this.router.navigate(['/home/child-a'])
   }
 }

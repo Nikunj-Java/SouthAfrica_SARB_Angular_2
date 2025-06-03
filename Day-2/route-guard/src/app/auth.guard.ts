@@ -1,5 +1,5 @@
 import { inject } from '@angular/core';
-import { CanActivateFn, Router } from '@angular/router';
+import { CanActivateFn,CanActivateChildFn, Router } from '@angular/router';
 import { AuthService } from './auth.service';
 
 export const authGuard: CanActivateFn = (route, state) => {
@@ -15,3 +15,10 @@ export const authGuard: CanActivateFn = (route, state) => {
   }
   
 };
+
+export const authChildGuard: CanActivateChildFn =()=>{
+  const auth= inject(AuthService);
+  const router=inject(Router);
+  return auth.isLoggedin() || router.createUrlTree(['/login']);
+
+}
