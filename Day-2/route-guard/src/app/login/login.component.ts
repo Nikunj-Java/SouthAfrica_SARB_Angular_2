@@ -12,7 +12,7 @@ export class LoginComponent {
 
   loginAsUser() {
     this.authService.loginAsUser();
-    this.router.navigate(['/']);
+    this.router.navigate(['/dashboard']);
   }
 
   loginAsAdmin() {

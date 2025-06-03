@@ -12,6 +12,7 @@ import { AdminComponent } from './admin/admin.component';
 import { NotAuthorizedComponent } from './not-authorized/not-authorized.component';
 import { ChildAComponent } from './child-a/child-a.component';
 import { ChildBComponent } from './child-b/child-b.component';
+import { ProfileComponent } from './profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { ChildBComponent } from './child-b/child-b.component';
     AdminComponent,
     NotAuthorizedComponent,
     ChildAComponent,
-    ChildBComponent
+    ChildBComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
