@@ -11,8 +11,17 @@ export class LoginComponent {
 
   constructor(private auth:AuthService,private router:Router){}
 
-  login(){
-    this.auth.login();
-    this.router.navigate(['/dashboard']);
+  // login(){
+  //   this.auth.login();
+  //   this.router.navigate(['/dashboard']);
+  // }
+
+  loginAsUser(){
+    this.auth.loginAsUser();
+    this.router.navigate(['/']);
+  }
+  loginAsAdmin(){
+    this.auth.loginAsAdmin();
+    this.router.navigate(['/admin']);
   }
 }
