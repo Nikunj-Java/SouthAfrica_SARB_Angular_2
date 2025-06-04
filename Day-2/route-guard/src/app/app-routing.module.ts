@@ -11,6 +11,8 @@ import { roleGuard } from './role.guard';
 import { NotAuthorizedComponent } from './not-authorized/not-authorized.component';
 import { ChildAComponent } from './child-a/child-a.component';
 import { ChildBComponent } from './child-b/child-b.component';
+import { EditProfileComponent } from './edit-profile/edit-profile.component';
+import { canDeactivateGuard } from './can-deactivate.guard';
 
 const routes: Routes = [
 { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -39,6 +41,10 @@ const routes: Routes = [
     component: AdminComponent,
     canActivate: [roleGuard],
     data: { expectedRole: 'admin' }
+  },
+  {path:"edit-profile",
+    component:EditProfileComponent,
+    canDeactivate:[canDeactivateGuard]
   },
   { path: 'not-authorized', component: NotAuthorizedComponent },
 ];

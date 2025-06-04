@@ -15,6 +15,7 @@ export class AuthService {
   loginAsAdmin(){
     this.currentUser={username:'admin',role:'admin'};
     this.login();
+        
   }
   
   logout(){
