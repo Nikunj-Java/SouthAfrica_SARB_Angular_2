@@ -1,0 +1,8 @@
+<div class="container">
+    <ul>
+        <li *ngFor="let t of todos$ | async">
+            {{t.task}}
+            <button class="btn btn-danger" (click)="removeTask(t.id)">Delete</button>
+        </li>
+    </ul>
+</div>

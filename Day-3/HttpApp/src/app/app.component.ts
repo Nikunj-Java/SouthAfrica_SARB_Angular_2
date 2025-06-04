@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from './services/data.service';
+import { SpinnerService } from './services/spinner.service';
 
 @Component({
   selector: 'app-root',
@@ -9,7 +10,15 @@ import { DataService } from './services/data.service';
 export class AppComponent implements OnInit {
 
   posts: any[]=[];
-  constructor(private service: DataService){}
+  constructor(private service: DataService,private spinner: SpinnerService){
+     this.spinner.loading.subscribe(value => {
+        this.isLoading = value;
+      });
+  }
+
+  isLoading = false;
+  
+     
 
   ngOnInit(): void {
    this.service.getData().subscribe({
