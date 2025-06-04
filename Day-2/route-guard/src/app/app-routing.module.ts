@@ -33,10 +33,10 @@ const routes: Routes = [
     ]
 
   },
-  {path:"admin/users",component:UsersComponent,canActivate: [roleGuard],
-    data: { expectedRole: 'admin' }},
-  {path:"admin/accounts",component:AccountsComponent,canActivate: [roleGuard],
-    data: { expectedRole: 'admin' }},
+  // {path:"admin/users",component:UsersComponent,canActivate: [roleGuard],
+  //   data: { expectedRole: 'admin' }},
+  // {path:"admin/accounts",component:AccountsComponent,canActivate: [roleGuard],
+  //   data: { expectedRole: 'admin' }},
   {
     path: 'admin',
     component: AdminComponent,

@@ -2,7 +2,8 @@ import { CanActivateFn } from '@angular/router';
 
 
 const isAdmin= ()=>{
-  return true;
+  return false;
+  //return false
 }
 
 export const resolveGuard: CanActivateFn = (route, state) => {
