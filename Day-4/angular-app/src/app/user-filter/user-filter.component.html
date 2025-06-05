@@ -1,0 +1,14 @@
+<h2>Filter Users</h2>
+
+<input [formControl]="searchControl" placeholder="Search by name" />
+
+<select [formControl]="companyControl">
+  <option value="">All Companies</option>
+  <option *ngFor="let company of companies" [value]="company">{{ company }}</option>
+</select>
+
+<ul>
+  <li *ngFor="let user of filteredUsers">
+    👤 {{ user.name }} — {{ user.company.name }}
+  </li>
+</ul>

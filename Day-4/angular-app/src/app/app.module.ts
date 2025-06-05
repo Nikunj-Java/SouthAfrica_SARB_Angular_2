@@ -8,13 +8,15 @@ import { DirectiveComponent } from './directive/directive.component';
 import { MyIfDirective } from './my-if-directive';
 import { ReactiveFormsModule } from '@angular/forms';
 import { UsersComponent } from './users/users.component';
+import { UserFilterComponent } from './user-filter/user-filter.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     DirectiveComponent,
     MyIfDirective,
-    UsersComponent
+    UsersComponent,
+    UserFilterComponent
   ],
   imports: [
     BrowserModule,
