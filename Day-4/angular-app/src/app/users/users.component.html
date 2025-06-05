@@ -1,0 +1,17 @@
+<div class="container bg-tertuary">
+    <h3>User Posts (Via MergeMap)</h3>
+
+
+
+    <div *ngFor="let u of userPostList">
+        <h3>{{u.name}}</h3>
+        <ul>
+            <li *ngFor="let p of u.posts">
+                <strong>{{p.title}}</strong>
+                <p>{{p.body}}</p>
+            </li>
+        </ul>
+        
+        <hr>
+    </div>
+</div>

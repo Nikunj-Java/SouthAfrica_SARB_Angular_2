@@ -7,12 +7,14 @@ import { AppComponent } from './app.component';
 import { DirectiveComponent } from './directive/directive.component';
 import { MyIfDirective } from './my-if-directive';
 import { ReactiveFormsModule } from '@angular/forms';
+import { UsersComponent } from './users/users.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     DirectiveComponent,
-    MyIfDirective
+    MyIfDirective,
+    UsersComponent
   ],
   imports: [
     BrowserModule,
